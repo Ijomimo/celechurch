@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cele Church - Sermons</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .page-header {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), 
+                        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .sermon-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .sermon-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .sermon-image {
+            height: 250px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-overlay:hover {
+            background: rgba(0,0,0,0.9);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .sermon-date {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .series-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-church me-2"></i>Cele Church
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div>
+                <h1 class="display-4 fw-bold">Sermon Library</h1>
+                <p class="lead">Listen to God's word and grow in your faith journey</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="py-5">
+        <div class="container">
+            <div class="search-box">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Search Sermons</h5>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by title, speaker, or topic...">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Filter by Speaker</h6>
+                        <select class="form-select">
+                            <option>All Speakers</option>
+                            <option>Pastor John Doe</option>
+                            <option>Pastor Jane Smith</option>
+                            <option>Evangelist Paul</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Filter by Series</h6>
+                        <select class="form-select">
+                            <option>All Series</option>
+                            <option>Faith & Victory</option>
+                            <option>God's Love</option>
+                            <option>Living for Christ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sermon Grid -->
+            <div class="row">
+                <!-- Sermon 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <i class="fas fa-cross"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">Nov 24, 2025</span>
+                                <span class="series-badge">Faith & Victory</span>
+                            </div>
+                            <h5>Victory in Christ</h5>
+                            <p class="text-muted">Pastor John Doe • 45 minutes</p>
+                            <p>Understanding our position as victorious believers in Christ Jesus and walking in that reality daily.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-play me-1"></i>Listen
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <i class="fas fa-heart"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">Nov 17, 2025</span>
+                                <span class="series-badge">God's Love</span>
+                            </div>
+                            <h5>The Father's Love</h5>
+                            <p class="text-muted">Pastor Jane Smith • 38 minutes</p>
+                            <p>Discovering the depth and unconditional nature of our Heavenly Father's love for each of us.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-play me-1"></i>Listen
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <i class="fas fa-dove"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">Nov 10, 2025</span>
+                                <span class="series-badge">Living for Christ</span>
+                            </div>
+                            <h5>Walking in the Spirit</h5>
+                            <p class="text-muted">Evangelist Paul • 42 minutes</p>
+                            <p>Learning to live and walk daily in the power and guidance of the Holy Spirit.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-play me-1"></i>Listen
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <i class="fas fa-book-open"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">Nov 3, 2025</span>
+                                <span class="series-badge">Faith & Victory</span>
+                            </div>
+                            <h5>The Power of God's Word</h5>
+                            <p class="text-muted">Pastor John Doe • 47 minutes</p>
+                            <p>Understanding how God's Word transforms lives and brings victory in every situation.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-play me-1"></i>Listen
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <i class="fas fa-praying-hands"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">Oct 27, 2025</span>
+                                <span class="series-badge">Living for Christ</span>
+                            </div>
+                            <h5>The Life of Prayer</h5>
+                            <p class="text-muted">Pastor Jane Smith • 41 minutes</p>
+                            <p>Building an effective prayer life that brings results and strengthens our relationship with God.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-play me-1"></i>Listen
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermon 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <i class="fas fa-crown"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">Oct 20, 2025</span>
+                                <span class="series-badge">God's Love</span>
+                            </div>
+                            <h5>Reigning with Christ</h5>
+                            <p class="text-muted">Evangelist Paul • 44 minutes</p>
+                            <p>Understanding our calling to reign as kings and priests in Christ Jesus and living in that authority.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-play me-1"></i>Listen
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-download me-1"></i>Download
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary btn-lg">Load More Sermons</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h5><i class="fas fa-church me-2"></i>Cele Church</h5>
+                    <p>A place where faith, family, and community come together</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <p>&copy; 2025 Cele Church. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Sermon play functionality
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.innerHTML.includes('Listen')) {
+                    alert('Audio player would open here. In a real website, this would play the sermon audio file.');
+                }
+            });
+        });
+
+        // Play overlay click
+        document.querySelectorAll('.play-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function() {
+                alert('Audio player would open here. In a real website, this would play the sermon audio file.');
+            });
+        });
+
+        // Download and Share functionality
+        document.querySelectorAll('.btn-outline-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.innerHTML.includes('Download')) {
+                    alert('Sermon download would start here. Contact the church for audio files.');
+                } else if (this.innerHTML.includes('Share')) {
+                    alert('Share dialog would open here with social media sharing options.');
+                }
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.btn-primary[type="button"]').addEventListener('click', function() {
+            const searchTerm = document.querySelector('input[type="text"]').value;
+            alert(`Searching for: "${searchTerm}". In a real website, this would filter the sermons.`);
+        });
+    </script>
+</body>
+</html>
