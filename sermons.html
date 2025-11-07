@@ -3,64 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cele Church - Sermons</title>
+    <title>Sermon Library - CCC Glory of Latter Days Parish, Edinburgh</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-bg: #ecf0f1;
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #000000;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-medium: #666666;
+            --text-dark: #212529;
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
+            color: var(--text-dark);
         }
         
         .navbar {
-            background: var(--primary-color) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            background: var(--white) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #eee;
         }
         
         .navbar-brand {
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+            transform: scale(1.02);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-logo {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover .navbar-logo {
+            transform: rotate(5deg) scale(1.1);
         }
         
         .page-header {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), 
-                        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
-            height: 40vh;
-            display: flex;
-            align-items: center;
+            background: var(--primary-color);
             color: white;
+            padding: 10rem 0 6rem;
             text-align: center;
+            margin-top: 76px;
+        }
+        
+        .page-header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .page-header .lead {
+            font-size: 1.4rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            background: white;
+            border: 1px solid #eee;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .search-box h5 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .search-box h6 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .sermon-card {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #eee;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             margin-bottom: 2rem;
+            height: 100%;
         }
         
         .sermon-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
         
         .sermon-image {
             height: 250px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 4rem;
+            font-size: 3rem;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .sermon-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .play-overlay {
@@ -85,55 +174,178 @@
         }
         
         .sermon-date {
-            background: var(--accent-color);
+            background: var(--primary-color);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
+            padding: 0.4rem 1rem;
             font-size: 0.9rem;
-            font-weight: bold;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 0;
         }
         
         .series-badge {
-            background: var(--secondary-color);
+            background: var(--gray-medium);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
+            padding: 0.4rem 1rem;
             font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 0;
         }
         
-        .search-box {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
+        .btn-sermon {
+            background: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+        
+        .btn-sermon:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+        
+        .btn-sermon-outline {
+            background: transparent;
+            border: 2px solid var(--gray-medium);
+            color: var(--gray-medium);
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+        
+        .btn-sermon-outline:hover {
+            background: var(--gray-medium);
+            color: white;
         }
         
         .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer h5, .footer h6 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer .navbar-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+        
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .social-links a {
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer h5 a {
+            transition: all 0.3s ease;
+        }
+        
+        .footer h5 a:hover {
+            color: #ccc !important;
+        }
+        
+        .footer h5 a:hover .navbar-logo {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .btn-load-more {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-load-more:hover {
             background: var(--primary-color);
             color: white;
-            padding: 3rem 0 1rem;
+            transform: translateY(-1px);
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid #ddd;
+            border-radius: 0;
+            padding: 12px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.1);
+        }
+        
+        .search-btn {
+            background: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: transparent;
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-church me-2"></i>Cele Church
+            <a class="navbar-brand" href="goldparishindex.html">
+                <img src="images/logo.jpg" alt="CCC Logo" class="navbar-logo">
+                CCC Glory of Latter Days Parish
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="sermons.html">Sermons</a></li>
-                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#about">ABOUT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#services">SUNDAYS</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="goldparishsermon.html">SERMONS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">EVENTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishgallery.html">GALLERY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#ministries">MINISTRIES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#contact">CONTACT</a></li>
                 </ul>
             </div>
         </div>
@@ -142,10 +354,8 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <div>
-                <h1 class="display-4 fw-bold">Sermon Library</h1>
-                <p class="lead">Listen to God's word and grow in your faith journey</p>
-            </div>
+            <h1>UNPACK THE CHRISTIAN FAITH TOGETHER</h1>
+            <p class="lead">Listen to our recent messages and grow in your faith journey</p>
         </div>
     </section>
 
@@ -155,30 +365,30 @@
             <div class="search-box">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Search Sermons</h5>
+                        <h5>SEARCH SERMONS</h5>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Search by title, speaker, or topic...">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn search-btn" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <h6>Filter by Speaker</h6>
+                        <h6>FILTER BY SPEAKER</h6>
                         <select class="form-select">
                             <option>All Speakers</option>
-                            <option>Pastor John Doe</option>
-                            <option>Pastor Jane Smith</option>
-                            <option>Evangelist Paul</option>
+                            <option>M/S/S/Evang. Anthony Thomas</option>
+                            <option>Evang. Aregbesola</option>
+                            <option>Prophet Alebiosu Abiodun Felix</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <h6>Filter by Series</h6>
+                        <h6>FILTER BY SERIES</h6>
                         <select class="form-select">
                             <option>All Series</option>
-                            <option>Faith & Victory</option>
-                            <option>God's Love</option>
-                            <option>Living for Christ</option>
+                            <option>Faith & Obedience</option>
+                            <option>Prayer & Worship</option>
+                            <option>Christian Living</option>
                         </select>
                     </div>
                 </div>
@@ -186,192 +396,175 @@
 
             <!-- Sermon Grid -->
             <div class="row">
-                <!-- Sermon 1 -->
+                <!-- Latest Sermon - Evang. Aregbesola -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <!-- Video preview -->
+                            <video class="sermon-video" muted onclick="toggleVideo(this)">
+                                <source src="videos/Evang_Aregbesola.mp4" type="video/mp4">
+                                <div style="color: white; text-align: center; padding-top: 80px;">Video not supported</div>
+                            </video>
+                            <div class="play-overlay" onclick="toggleVideo(this.parentElement.querySelector('video'))">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">NOV 7, 2025</span>
+                                <span class="series-badge">CHRISTIAN LIVING</span>
+                            </div>
+                            <h5>Giving Freely to Change Lives</h5>
+                            <p class="text-muted">Evang. Aregbesola • Preview</p>
+                            <p>Giving freely to change peoples life is a core assignment of brethren - discovering our calling to serve others through generosity.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sermon btn-sm" onclick="playVideo()">
+                                    <i class="fas fa-play me-1"></i>WATCH
+                                </button>
+                                <a href="https://www.instagram.com/reel/DQkLKbVDMrb/" target="_blank" class="btn btn-sermon-outline btn-sm">
+                                    <i class="fab fa-instagram me-1"></i>FULL SERMON
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- M/S/S/Evang. Anthony Thomas Sermon -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <!-- Video preview -->
+                            <video class="sermon-video" muted onclick="toggleVideo(this)">
+                                <source src="videos/MSSE_Anthony.mp4" type="video/mp4">
+                                <div style="color: white; text-align: center; padding-top: 80px;">Video not supported</div>
+                            </video>
+                            <div class="play-overlay" onclick="toggleVideo(this.parentElement.querySelector('video'))">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">OCT 26, 2025</span>
+                                <span class="series-badge">FAITH & OBEDIENCE</span>
+                            </div>
+                            <h5>Spiritual Perception Through Obedience</h5>
+                            <p class="text-muted">M/S/S/Evang. Anthony Thomas • October Sermon</p>
+                            <p>We can only see and perceive what the Lord wants us to know only if we obey GOD - understanding divine revelation through faithful obedience.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sermon btn-sm" onclick="playVideo()">
+                                    <i class="fas fa-play me-1"></i>WATCH
+                                </button>
+                                <a href="https://www.instagram.com/reel/DQR7erjDM7f/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="btn btn-sermon-outline btn-sm">
+                                    <i class="fab fa-instagram me-1"></i>FULL SERMON
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prophet Alebiosu Abiodun Felix Sermon -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="sermon-card">
+                        <div class="sermon-image">
+                            <!-- Video preview -->
+                            <video class="sermon-video" muted onclick="toggleVideo(this)">
+                                <source src="videos/Pro.%20Alebiosu%20Abiodun%20Felix%20(1).mp4" type="video/mp4">
+                                <div style="color: white; text-align: center; padding-top: 80px;">Video not supported</div>
+                            </video>
+                            <div class="play-overlay" onclick="toggleVideo(this.parentElement.querySelector('video'))">
+                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="sermon-date">OCT 12, 2025</span>
+                                <span class="series-badge">PRAYER & WORSHIP</span>
+                            </div>
+                            <h5>Prayer Session with the Prophet</h5>
+                            <p class="text-muted">Prophet Alebiosu Abiodun Felix • October Sermon</p>
+                            <p>Prayer session with the prophet of God - experiencing divine connection and spiritual breakthrough through powerful intercession.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sermon btn-sm" onclick="playVideo()">
+                                    <i class="fas fa-play me-1"></i>WATCH
+                                </button>
+                                <a href="https://www.instagram.com/reel/DPuGgOzjIBk/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="btn btn-sermon-outline btn-sm">
+                                    <i class="fab fa-instagram me-1"></i>FULL SERMON
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Placeholder Sermons -->
                 <div class="col-lg-4 col-md-6">
                     <div class="sermon-card">
                         <div class="sermon-image">
                             <i class="fas fa-cross"></i>
-                            <div class="play-overlay">
-                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
-                            </div>
                         </div>
                         <div class="p-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="sermon-date">Nov 24, 2025</span>
-                                <span class="series-badge">Faith & Victory</span>
+                                <span class="sermon-date">OCT 1, 2025</span>
+                                <span class="series-badge">FAITH & OBEDIENCE</span>
                             </div>
-                            <h5>Victory in Christ</h5>
-                            <p class="text-muted">Pastor John Doe • 45 minutes</p>
-                            <p>Understanding our position as victorious believers in Christ Jesus and walking in that reality daily.</p>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-play me-1"></i>Listen
+                            <h5>Walking in Faith</h5>
+                            <p class="text-muted">M/S/S/Evang. Anthony Thomas • 35 minutes</p>
+                            <p>Understanding our calling to walk by faith and not by sight, trusting in God's promises and provision for our lives.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sermon btn-sm" onclick="playVideo()">
+                                    <i class="fas fa-play me-1"></i>LISTEN
                                 </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-download me-1"></i>Download
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-share me-1"></i>Share
+                                <button class="btn btn-sermon-outline btn-sm">
+                                    <i class="fas fa-download me-1"></i>DOWNLOAD
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sermon 2 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="sermon-card">
                         <div class="sermon-image">
                             <i class="fas fa-heart"></i>
-                            <div class="play-overlay">
-                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
-                            </div>
                         </div>
                         <div class="p-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="sermon-date">Nov 17, 2025</span>
-                                <span class="series-badge">God's Love</span>
+                                <span class="sermon-date">SEP 24, 2025</span>
+                                <span class="series-badge">CHRISTIAN LIVING</span>
                             </div>
-                            <h5>The Father's Love</h5>
-                            <p class="text-muted">Pastor Jane Smith • 38 minutes</p>
-                            <p>Discovering the depth and unconditional nature of our Heavenly Father's love for each of us.</p>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-play me-1"></i>Listen
+                            <h5>Love Without Boundaries</h5>
+                            <p class="text-muted">Evang. Aregbesola • 42 minutes</p>
+                            <p>Exploring the depths of God's unconditional love and how we can extend that same love to others in our daily lives.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sermon btn-sm" onclick="playVideo()">
+                                    <i class="fas fa-play me-1"></i>LISTEN
                                 </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-download me-1"></i>Download
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-share me-1"></i>Share
+                                <button class="btn btn-sermon-outline btn-sm">
+                                    <i class="fas fa-download me-1"></i>DOWNLOAD
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sermon 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="sermon-card">
-                        <div class="sermon-image">
-                            <i class="fas fa-dove"></i>
-                            <div class="play-overlay">
-                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="sermon-date">Nov 10, 2025</span>
-                                <span class="series-badge">Living for Christ</span>
-                            </div>
-                            <h5>Walking in the Spirit</h5>
-                            <p class="text-muted">Evangelist Paul • 42 minutes</p>
-                            <p>Learning to live and walk daily in the power and guidance of the Holy Spirit.</p>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-play me-1"></i>Listen
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-download me-1"></i>Download
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-share me-1"></i>Share
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sermon 4 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="sermon-card">
-                        <div class="sermon-image">
-                            <i class="fas fa-book-open"></i>
-                            <div class="play-overlay">
-                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="sermon-date">Nov 3, 2025</span>
-                                <span class="series-badge">Faith & Victory</span>
-                            </div>
-                            <h5>The Power of God's Word</h5>
-                            <p class="text-muted">Pastor John Doe • 47 minutes</p>
-                            <p>Understanding how God's Word transforms lives and brings victory in every situation.</p>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-play me-1"></i>Listen
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-download me-1"></i>Download
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-share me-1"></i>Share
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sermon 5 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="sermon-card">
                         <div class="sermon-image">
                             <i class="fas fa-praying-hands"></i>
-                            <div class="play-overlay">
-                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
-                            </div>
                         </div>
                         <div class="p-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="sermon-date">Oct 27, 2025</span>
-                                <span class="series-badge">Living for Christ</span>
+                                <span class="sermon-date">SEP 17, 2025</span>
+                                <span class="series-badge">PRAYER & WORSHIP</span>
                             </div>
-                            <h5>The Life of Prayer</h5>
-                            <p class="text-muted">Pastor Jane Smith • 41 minutes</p>
-                            <p>Building an effective prayer life that brings results and strengthens our relationship with God.</p>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-play me-1"></i>Listen
+                            <h5>The Power of Effective Prayer</h5>
+                            <p class="text-muted">Prophet Alebiosu Abiodun Felix • 38 minutes</p>
+                            <p>Learning to pray effectively and see results, understanding the principles that make our prayers powerful and effective before God.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sermon btn-sm" onclick="playVideo()">
+                                    <i class="fas fa-play me-1"></i>LISTEN
                                 </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-download me-1"></i>Download
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-share me-1"></i>Share
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sermon 6 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="sermon-card">
-                        <div class="sermon-image">
-                            <i class="fas fa-crown"></i>
-                            <div class="play-overlay">
-                                <i class="fas fa-play" style="font-size: 2rem; margin-left: 5px;"></i>
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="sermon-date">Oct 20, 2025</span>
-                                <span class="series-badge">God's Love</span>
-                            </div>
-                            <h5>Reigning with Christ</h5>
-                            <p class="text-muted">Evangelist Paul • 44 minutes</p>
-                            <p>Understanding our calling to reign as kings and priests in Christ Jesus and living in that authority.</p>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-play me-1"></i>Listen
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-download me-1"></i>Download
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-share me-1"></i>Share
+                                <button class="btn btn-sermon-outline btn-sm">
+                                    <i class="fas fa-download me-1"></i>DOWNLOAD
                                 </button>
                             </div>
                         </div>
@@ -380,8 +573,8 @@
             </div>
 
             <!-- Load More Button -->
-            <div class="text-center mt-4">
-                <button class="btn btn-outline-primary btn-lg">Load More Sermons</button>
+            <div class="text-center mt-5">
+                <button class="btn btn-load-more">LOAD MORE SERMONS</button>
             </div>
         </div>
     </section>
@@ -390,12 +583,56 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <h5><i class="fas fa-church me-2"></i>Cele Church</h5>
-                    <p>A place where faith, family, and community come together</p>
+                <div class="col-lg-4 mb-4">
+                    <h5>
+                        <a href="goldparishindex.html" style="text-decoration: none; color: inherit;">
+                            <img src="images/logo.jpg" alt="CCC Logo" class="navbar-logo">
+                            CCC Glory of Latter Days Parish
+                        </a>
+                    </h5>
+                    <p>A place where faith, family, and community come together to worship, grow, and serve.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                    </div>
                 </div>
-                <div class="col-lg-6 text-lg-end">
-                    <p>&copy; 2025 Cele Church. All rights reserved.</p>
+                <div class="col-lg-2 mb-4">
+                    <h6>QUICK LINKS</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="goldparishindex.html" class="text-white">Home</a></li>
+                        <li><a href="goldparishindex.html#about" class="text-white">About</a></li>
+                        <li><a href="goldparishindex.html#services" class="text-white">Sundays</a></li>
+                        <li><a href="goldparishindex.html#events" class="text-white">Events</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>MINISTRIES</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Children's Ministry</a></li>
+                        <li><a href="#" class="text-white">Youth Ministry</a></li>
+                        <li><a href="#" class="text-white">Women's Ministry</a></li>
+                        <li><a href="#" class="text-white">Men's Ministry</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>RESOURCES</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="goldparishsermon.html" class="text-white">Sermon Library</a></li>
+                        <li><a href="#" class="text-white">Bible Study</a></li>
+                        <li><a href="#" class="text-white">Prayer Requests</a></li>
+                        <li><a href="#" class="text-white">Online Giving</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-lg-8">
+                    <p>&copy; 2025 CCC Glory of Latter Days Parish. All rights reserved.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <p>Built with ❤️ for God's glory</p>
                 </div>
             </div>
         </div>
@@ -405,37 +642,70 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Sermon play functionality
-        document.querySelectorAll('.btn-primary').forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.innerHTML.includes('Listen')) {
-                    alert('Audio player would open here. In a real website, this would play the sermon audio file.');
+        // Video toggle functionality
+        function toggleVideo(video) {
+            if (video.paused) {
+                // Enable sound and controls when user clicks to play
+                video.muted = false;
+                video.controls = true;
+                video.play();
+                // Hide the custom play button since video now has controls
+                const overlay = video.parentElement.querySelector('.play-overlay');
+                if (overlay) overlay.style.opacity = '0';
+            } else {
+                video.pause();
+            }
+        }
+
+        // General play video function
+        function playVideo() {
+            alert('Video player would open here. Click on the video preview above to watch the sermon preview, or use the "FULL SERMON" button to watch the complete message on Instagram.');
+        }
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('input[type="text"]').value;
+            if (searchTerm.trim()) {
+                alert(`Searching for: "${searchTerm}". In a fully functional website, this would filter the sermons based on your search term.`);
+            } else {
+                alert('Please enter a search term to find sermons.');
+            }
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.form-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const filterType = this.previousElementSibling.textContent.includes('SPEAKER') ? 'speaker' : 'series';
+                const filterValue = this.value;
+                if (filterValue !== 'All Speakers' && filterValue !== 'All Series') {
+                    alert(`Filtering by ${filterType}: "${filterValue}". In a fully functional website, this would show only sermons matching your selection.`);
                 }
             });
         });
 
-        // Play overlay click
-        document.querySelectorAll('.play-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function() {
-                alert('Audio player would open here. In a real website, this would play the sermon audio file.');
-            });
+        // Load more functionality
+        document.querySelector('.btn-load-more').addEventListener('click', function() {
+            alert('Loading more sermons... In a fully functional website, this would load additional sermon entries from the database.');
         });
 
-        // Download and Share functionality
-        document.querySelectorAll('.btn-outline-secondary').forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.innerHTML.includes('Download')) {
-                    alert('Sermon download would start here. Contact the church for audio files.');
-                } else if (this.innerHTML.includes('Share')) {
+        // Download and share functionality
+        document.querySelectorAll('.btn-sermon-outline').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.innerHTML.includes('DOWNLOAD')) {
+                    e.preventDefault();
+                    alert('Sermon download would start here. Please contact the church office to request sermon audio files.');
+                } else if (this.innerHTML.includes('SHARE')) {
+                    e.preventDefault();
                     alert('Share dialog would open here with social media sharing options.');
                 }
             });
         });
 
-        // Search functionality
-        document.querySelector('.btn-primary[type="button"]').addEventListener('click', function() {
-            const searchTerm = document.querySelector('input[type="text"]').value;
-            alert(`Searching for: "${searchTerm}". In a real website, this would filter the sermons.`);
+        // Enter key search
+        document.querySelector('input[type="text"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
         });
     </script>
 </body>
