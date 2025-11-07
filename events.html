@@ -3,116 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cele Church - Events</title>
+    <title>Events - CCC Glory of Latter Days Parish, Edinburgh</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-bg: #ecf0f1;
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #000000;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-medium: #666666;
+            --text-dark: #212529;
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
+            color: var(--text-dark);
         }
         
         .navbar {
-            background: var(--primary-color) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            background: var(--white) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #eee;
         }
         
         .navbar-brand {
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+            transform: scale(1.02);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-logo {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover .navbar-logo {
+            transform: rotate(360deg) scale(1.1);
         }
         
         .page-header {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), 
-                        url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
-            height: 40vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(51,51,51,0.6)), 
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 50vh;
             display: flex;
             align-items: center;
             color: white;
             text-align: center;
+            margin-top: 70px;
         }
         
-        .event-card {
+        .page-header h1 {
+            font-weight: 700;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .page-header .lead {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .upcoming-events {
+            background: var(--gray-light);
+            padding: 5rem 0;
+        }
+        
+        .event-item {
             background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            margin-bottom: 2rem;
+            border: 1px solid #eee;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border-radius: 0;
         }
         
-        .event-card:hover {
-            transform: translateY(-5px);
+        .event-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #ddd;
+        }
+        
+        .event-media {
+            border: 1px solid #eee;
+            overflow: hidden;
+            margin-bottom: 20px;
         }
         
         .event-image {
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
         
-        .event-date {
-            background: var(--accent-color);
+        .event-item:hover .event-image {
+            transform: scale(1.02);
+        }
+        
+        .event-date-badge {
+            background: var(--primary-color);
             color: white;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
+            border-radius: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
             display: inline-block;
+        }
+        
+        .event-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .event-details {
             margin-bottom: 1rem;
         }
         
-        .btn-register {
-            background: var(--secondary-color);
-            border: none;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+        .event-details p {
+            margin-bottom: 0.5rem;
+            color: var(--gray-medium);
         }
         
-        .btn-register:hover {
-            background: #2980b9;
+        .event-details i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+        
+        .event-description {
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-event {
+            background: var(--primary-color);
+            border: 2px solid var(--primary-color);
             color: white;
-            transform: translateY(-2px);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-event:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+        
+        .btn-event-outline {
+            background: transparent;
+            border: 2px solid var(--gray-medium);
+            color: var(--gray-medium);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-event-outline:hover {
+            background: var(--gray-medium);
+            color: white;
+        }
+        
+        .filter-section {
+            background: var(--white);
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .filter-box {
+            background: var(--gray-light);
+            padding: 2rem;
+            border: 1px solid #eee;
+            margin-bottom: 2rem;
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid #ddd;
+            border-radius: 0;
+            padding: 12px 15px;
+            font-weight: 500;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.1);
         }
         
         .footer {
-            background: var(--primary-color);
+            background: var(--text-dark);
             color: white;
-            padding: 3rem 0 1rem;
-            margin-top: 5rem;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer h5, .footer h6 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer .navbar-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+            border-radius: 50%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .footer .navbar-brand:hover .navbar-logo {
+            transform: rotate(-360deg) scale(1.1);
+        }
+        
+        .badge {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 0;
+        }
+        
+        .fixed-top {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .event-item {
+                padding: 1.5rem;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 0 5px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-church me-2"></i>Cele Church
+                <img src="images/logo.jpg" alt="CCC Logo" class="navbar-logo">
+                CCC Glory of Latter Days Parish
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#about">ABOUT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#services">SUNDAYS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishsermon.html">SERMONS</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="goldparishevents.html">EVENTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishgallery.html">GALLERY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#ministries">MINISTRIES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishindex.html#contact">CONTACT</a></li>
                 </ul>
             </div>
         </div>
@@ -121,174 +344,204 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <div>
-                <h1 class="display-4 fw-bold">Church Events</h1>
-                <p class="lead">Join us for fellowship, worship, and community building</p>
+            <h1>EVENTS</h1>
+            <p class="lead">Stay connected with our church community and join us for upcoming events</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-box">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>SEARCH EVENTS</h5>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by event name, ministry, or type...">
+                            <button class="btn btn-event" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>FILTER BY MINISTRY</h6>
+                        <select class="form-select">
+                            <option>All Ministries</option>
+                            <option>Teens Ministry</option>
+                            <option>Women's Ministry</option>
+                            <option>Children's Ministry</option>
+                            <option>All Ages</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>FILTER BY MONTH</h6>
+                        <select class="form-select">
+                            <option>All Months</option>
+                            <option>November 2025</option>
+                            <option>December 2025</option>
+                            <option>January 2026</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Events Content -->
-    <section class="py-5">
+    <!-- Events Section -->
+    <section class="upcoming-events">
         <div class="container">
+            <div class="section-title">
+                <h2>UPCOMING EVENTS</h2>
+                <p class="lead">Join us for these upcoming events and activities</p>
+            </div>
+            
             <div class="row">
-                <!-- Upcoming Events -->
-                <div class="col-lg-8">
-                    <h2 class="mb-4">Upcoming Events</h2>
-                    
-                    <!-- Event 1 -->
-                    <div class="event-card">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="event-image">
-                                    <i class="fas fa-cross"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <span class="event-date">December 8, 2025</span>
-                                    <h4>Sunday Worship Service</h4>
-                                    <p><i class="fas fa-clock me-2"></i><strong>Time:</strong> 10:00 AM - 12:00 PM</p>
-                                    <p><i class="fas fa-map-marker-alt me-2"></i><strong>Location:</strong> Main Sanctuary</p>
-                                    <p>Join us for our weekly worship service filled with praise, worship, and powerful word from God. Come as you are and experience the love of Christ.</p>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-register">Learn More</button>
-                                        <button class="btn btn-outline-primary">Share Event</button>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Free Math Tutorial Event -->
+                <div class="col-lg-6 mb-4">
+                    <div class="event-item">
+                        <div class="event-media mb-3">
+                            <img class="event-image" src="teens/Tutorial.jpg" alt="Free Maths Tutorial">
                         </div>
-                    </div>
-
-                    <!-- Event 2 -->
-                    <div class="event-card">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="event-image">
-                                    <i class="fas fa-holly-berry"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <span class="event-date">December 24, 2025</span>
-                                    <h4>Christmas Eve Service</h4>
-                                    <p><i class="fas fa-clock me-2"></i><strong>Time:</strong> 7:00 PM - 9:00 PM</p>
-                                    <p><i class="fas fa-map-marker-alt me-2"></i><strong>Location:</strong> Main Sanctuary</p>
-                                    <p>Celebrate the birth of our Lord Jesus Christ with us in a beautiful candlelight service filled with carols, readings, and worship.</p>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-register">Register Now</button>
-                                        <button class="btn btn-outline-primary">Share Event</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="event-date-badge">NOVEMBER 11, 2025</div>
+                        <h4 class="event-title">Free Math Tutorial</h4>
+                        <div class="event-details">
+                            <p><i class="fas fa-clock me-2"></i>2:00 PM</p>
+                            <p><i class="fas fa-laptop me-2"></i>Join via Zoom</p>
+                            <p><i class="fas fa-link me-2"></i>Zoom Link: https://us05web.zoom.us/j/82503070266?pwd=vgx9VpLlxyskbzaqy3Pkr1gVcq82NV.1</p>
                         </div>
-                    </div>
-
-                    <!-- Event 3 -->
-                    <div class="event-card">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="event-image">
-                                    <i class="fas fa-praying-hands"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <span class="event-date">January 1, 2026</span>
-                                    <h4>New Year Prayer Service</h4>
-                                    <p><i class="fas fa-clock me-2"></i><strong>Time:</strong> 11:00 PM - 1:00 AM</p>
-                                    <p><i class="fas fa-map-marker-alt me-2"></i><strong>Location:</strong> Main Sanctuary</p>
-                                    <p>Start the new year in prayer and thanksgiving. Join us as we seek God's face for the new year and commit our ways to Him.</p>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-register">Join Us</button>
-                                        <button class="btn btn-outline-primary">Share Event</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="event-description">
+                            <p>It's a great chance to strengthen your maths skills, ask questions, and prepare ahead - all for free! Perfect for teens who want to excel in their studies.</p>
                         </div>
-                    </div>
-
-                    <!-- Event 4 -->
-                    <div class="event-card">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="event-image">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <span class="event-date">January 15, 2026</span>
-                                    <h4>Youth Fellowship Night</h4>
-                                    <p><i class="fas fa-clock me-2"></i><strong>Time:</strong> 6:00 PM - 9:00 PM</p>
-                                    <p><i class="fas fa-map-marker-alt me-2"></i><strong>Location:</strong> Youth Hall</p>
-                                    <p>An evening of fun, fellowship, and spiritual growth for our young people. Games, worship, and inspiring messages.</p>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-register">Register</button>
-                                        <button class="btn btn-outline-primary">Share Event</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success">Teens</span>
+                            <a href="#" class="btn-event" onclick="joinEvent('Math Tutorial')">JOIN EVENT</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sidebar -->
-                <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-calendar me-2"></i>Quick Calendar</h5>
+                <!-- Women's Gathered in Gratitude Event -->
+                <div class="col-lg-6 mb-4">
+                    <div class="event-item">
+                        <div class="event-media mb-3">
+                            <img class="event-image" src="women/women.jpeg" alt="Gathered in Gratitude">
                         </div>
-                        <div class="card-body">
-                            <div class="list-group list-group-flush">
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Dec 8</span>
-                                    <span>Sunday Service</span>
-                                </div>
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Dec 24</span>
-                                    <span>Christmas Eve</span>
-                                </div>
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Jan 1</span>
-                                    <span>New Year Prayer</span>
-                                </div>
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Jan 15</span>
-                                    <span>Youth Fellowship</span>
-                                </div>
-                            </div>
+                        <div class="event-date-badge">NOVEMBER 15, 2025</div>
+                        <h4 class="event-title">Gathered in Gratitude</h4>
+                        <div class="event-details">
+                            <p><i class="fas fa-clock me-2"></i>12:00 PM - 4:00 PM</p>
+                            <p><i class="fas fa-church me-2"></i>Church Auditorium</p>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>175 F1 High Street, Musselburgh</p>
                         </div>
-                    </div>
-
-                    <div class="card mb-4">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="fas fa-bell me-2"></i>Event Notifications</h5>
+                        <div class="event-description">
+                            <p>Join us for a beautiful afternoon of connection, celebration, and thanksgiving. A special time for women to come together in fellowship and gratitude.</p>
                         </div>
-                        <div class="card-body">
-                            <p>Stay updated on all church events!</p>
-                            <form>
-                                <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Your email address">
-                                </div>
-                                <button type="submit" class="btn btn-success w-100">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header bg-info text-white">
-                            <h5 class="mb-0"><i class="fas fa-question-circle me-2"></i>Need Help?</h5>
-                        </div>
-                        <div class="card-body">
-                            <p>Questions about events or need assistance?</p>
-                            <p><strong>Contact our Events Team:</strong></p>
-                            <p><i class="fas fa-phone me-2"></i>(234) 8123-456789</p>
-                            <p><i class="fas fa-envelope me-2"></i>events@celechurch.org</p>
-                            <a href="contact.html" class="btn btn-info w-100">Contact Us</a>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success">Women</span>
+                            <a href="#" class="btn-event" onclick="joinEvent('Gathered in Gratitude')">JOIN EVENT</a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Christmas Carol Service -->
+                <div class="col-lg-6 mb-4">
+                    <div class="event-item">
+                        <div class="event-media mb-3">
+                            <img class="event-image" src="images/events/538359275_18016959650767677_2254471270723542986_n.jpg" alt="Christmas Carol Service">
+                        </div>
+                        <div class="event-date-badge">DECEMBER 15, 2025</div>
+                        <h4 class="event-title">Christmas Carol Service</h4>
+                        <div class="event-details">
+                            <p><i class="fas fa-clock me-2"></i>7:00 PM - 8:30 PM</p>
+                            <p><i class="fas fa-church me-2"></i>Church Auditorium</p>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>175 F1 High Street, Musselburgh</p>
+                        </div>
+                        <div class="event-description">
+                            <p>A beautiful evening of Christmas carols and readings celebrating the birth of Christ. Join us for this special celebration of the Christmas season with traditional carols and festive fellowship.</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success">All Ages</span>
+                            <a href="#" class="btn-event" onclick="joinEvent('Christmas Carol Service')">JOIN EVENT</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teens Podcast (Past Event for Reference) -->
+                <div class="col-lg-6 mb-4">
+                    <div class="event-item" style="opacity: 0.8;">
+                        <div class="event-media mb-3">
+                            <img class="event-image" src="teens/podcast1_2.jpg" alt="Teen podcast">
+                        </div>
+                        <div class="event-date-badge" style="background: #666;">OCTOBER 19, 2025</div>
+                        <h4 class="event-title">Teens Podcast</h4>
+                        <div class="event-details">
+                            <p><i class="fas fa-clock me-2"></i>1:00 PM - 5:30 PM</p>
+                            <p><i class="fas fa-video me-2"></i>Recording Session</p>
+                            <p><i class="fas fa-external-link-alt me-2"></i>Watch: https://youtu.be/s9OU9wrmFAo?feature=share1</p>
+                        </div>
+                        <div class="event-description">
+                            <p>Purpose isn't found later - it begins the moment you choose to live intentionally. A powerful discussion with our youth about finding and living with purpose.</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-secondary">Teens</span>
+                            <a href="https://youtu.be/s9OU9wrmFAo?feature=share1" target="_blank" class="btn-event-outline">WATCH RECORDING</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Future Events Placeholder -->
+                <div class="col-lg-6 mb-4">
+                    <div class="event-item">
+                        <div class="event-media mb-3">
+                            <div style="height: 250px; background: linear-gradient(135deg, #000, #333); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-pray fa-4x" style="color: white; opacity: 0.7;"></i>
+                            </div>
+                        </div>
+                        <div class="event-date-badge">JANUARY 15, 2026</div>
+                        <h4 class="event-title">New Year Prayer & Fasting</h4>
+                        <div class="event-details">
+                            <p><i class="fas fa-clock me-2"></i>6:00 AM - 6:00 PM</p>
+                            <p><i class="fas fa-church me-2"></i>Church Auditorium</p>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>175 F1 High Street, Musselburgh</p>
+                        </div>
+                        <div class="event-description">
+                            <p>Join us for a powerful day of prayer and fasting as we seek God's direction and blessing for the new year. A time of spiritual renewal and dedication.</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success">All Ages</span>
+                            <a href="#" class="btn-event" onclick="joinEvent('Prayer & Fasting')">JOIN EVENT</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Youth Fellowship -->
+                <div class="col-lg-6 mb-4">
+                    <div class="event-item">
+                        <div class="event-media mb-3">
+                            <div style="height: 250px; background: linear-gradient(135deg, #333, #666); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-users fa-4x" style="color: white; opacity: 0.7;"></i>
+                            </div>
+                        </div>
+                        <div class="event-date-badge">EVERY FRIDAY</div>
+                        <h4 class="event-title">Youth Fellowship</h4>
+                        <div class="event-details">
+                            <p><i class="fas fa-clock me-2"></i>7:00 PM - 9:00 PM</p>
+                            <p><i class="fas fa-church me-2"></i>Youth Hall</p>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>175 F1 High Street, Musselburgh</p>
+                        </div>
+                        <div class="event-description">
+                            <p>Weekly youth fellowship for teenagers and young adults. Join us for worship, Bible study, games, and meaningful connections with peers in faith.</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success">Youth</span>
+                            <a href="#" class="btn-event" onclick="joinEvent('Youth Fellowship')">JOIN FELLOWSHIP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-event" style="padding: 15px 40px;" onclick="loadMoreEvents()">LOAD MORE EVENTS</button>
             </div>
         </div>
     </section>
@@ -297,12 +550,56 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <h5><i class="fas fa-church me-2"></i>Cele Church</h5>
-                    <p>A place where faith, family, and community come together</p>
+                <div class="col-lg-4 mb-4">
+                    <h5>
+                        <a href="goldparishindex.html" style="text-decoration: none; color: inherit;">
+                            <img src="images/logo.jpg" alt="CCC Logo" class="navbar-logo">
+                            CCC Glory of Latter Days Parish
+                        </a>
+                    </h5>
+                    <p>A place where faith, family, and community come together to worship, grow, and serve.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                    </div>
                 </div>
-                <div class="col-lg-6 text-lg-end">
-                    <p>&copy; 2025 Cele Church. All rights reserved.</p>
+                <div class="col-lg-2 mb-4">
+                    <h6>QUICK LINKS</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="goldparishindex.html" class="text-white">Home</a></li>
+                        <li><a href="goldparishindex.html#about" class="text-white">About</a></li>
+                        <li><a href="goldparishindex.html#services" class="text-white">Sundays</a></li>
+                        <li><a href="goldparishindex.html#events" class="text-white">Events</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>MINISTRIES</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Children's Ministry</a></li>
+                        <li><a href="#" class="text-white">Youth Ministry</a></li>
+                        <li><a href="#" class="text-white">Women's Ministry</a></li>
+                        <li><a href="#" class="text-white">Men's Ministry</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>RESOURCES</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="goldparishsermon.html" class="text-white">Sermon Library</a></li>
+                        <li><a href="#" class="text-white">Bible Study</a></li>
+                        <li><a href="#" class="text-white">Prayer Requests</a></li>
+                        <li><a href="#" class="text-white">Online Giving</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-lg-8">
+                    <p>&copy; 2025 CCC Glory of Latter Days Parish. All rights reserved.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <p>Built with ❤️ for God's glory</p>
                 </div>
             </div>
         </div>
@@ -313,17 +610,55 @@
     
     <script>
         // Event registration functionality
-        document.querySelectorAll('.btn-register').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('Event registration would open here. Contact the church for more information.');
+        function joinEvent(eventName) {
+            alert(`Thank you for your interest in "${eventName}"! In a fully functional website, this would open a registration form or contact the church office for more details. Please contact us at the church for registration information.`);
+        }
+
+        // Search functionality
+        document.querySelector('.btn-event[type="button"]').addEventListener('click', function() {
+            const searchTerm = document.querySelector('input[type="text"]').value;
+            if (searchTerm.trim()) {
+                alert(`Searching for events: "${searchTerm}". In a fully functional website, this would filter the events based on your search term.`);
+            } else {
+                alert('Please enter a search term to find events.');
+            }
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.form-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const filterType = this.previousElementSibling.textContent.includes('MINISTRY') ? 'ministry' : 'month';
+                const filterValue = this.value;
+                if (filterValue !== 'All Ministries' && filterValue !== 'All Months') {
+                    alert(`Filtering events by ${filterType}: "${filterValue}". In a fully functional website, this would show only events matching your selection.`);
+                }
             });
         });
 
-        // Email subscription
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for subscribing to our event notifications!');
-            this.reset();
+        // Load more functionality
+        function loadMoreEvents() {
+            alert('Loading more events... In a fully functional website, this would load additional event entries from the database.');
+        }
+
+        // Enter key search
+        document.querySelector('input[type="text"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.btn-event[type="button"]').click();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
