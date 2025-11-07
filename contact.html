@@ -1,1 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CCC Glory of Latter Days Parish, Edinburgh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #000000;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-medium: #666666;
+            --text-dark: #212529;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+        
+        .navbar {
+            background: var(--white) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+            transform: scale(1.02);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-logo {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover .navbar-logo {
+            transform: rotate(360deg) scale(1.1);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(51,51,51,0.6)), 
+                        url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .page-header h1 {
+            font-weight: 700;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .page-header .lead {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-info {
+            background: var(--gray-light);
+            padding: 5rem 0;
+        }
+        
+        .contact-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .contact-card i {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover i {
+            transform: scale(1.1);
+        }
+        
+        .contact-card h4 {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .contact-card p {
+            color: var(--gray-medium);
+            line-height: 1.8;
+        }
+        
+        .contact-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-card a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .contact-form-section {
+            background: var(--white);
+            padding: 5rem 0;
+        }
+        
+        .form-card {
+            background: var(--white);
+            border: 1px solid #eee;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 0;
+            padding: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.1);
+        }
+        
+        .btn-custom {
+            background: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+        
+        .btn-custom:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+        
+        .service-times {
+            background: var(--light-bg);
+            padding: 5rem 0;
+        }
+        
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #eee;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gray-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .service-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .service-card:hover .service-icon {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .service-card:hover .service-icon i {
+            color: white;
+        }
+        
+        .service-card h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .service-card p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-card p:last-child {
+            color: var(--gray-medium);
+            font-style: italic;
+        }
+        
+        .map-section {
+            background: var(--white);
+            padding: 5rem 0;
+        }
+        
+        .map-container {
+            background: var(--gray-light);
+            padding: 3rem;
+            border: 1px solid #eee;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer h5, .footer h6 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer .navbar-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+            border-radius: 50%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .footer .navbar-brand:hover .navbar-logo {
+            transform: rotate(-360deg) scale(1.1);
+        }
+        
+        .fixed-top {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 0 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.jpg" alt="CCC Logo" class="navbar-logo">
+                CCC Glory of Latter Days Parish
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">ABOUT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#services">SUNDAYS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishsermon.html">SERMONS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishevents.html">EVENTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="goldparishgallery.html">GALLERY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#ministries">MINISTRIES</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="goldparishcontact.html">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>CONTACT US</h1>
+            <p class="lead">We'd love to hear from you. Get in touch with our church family</p>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="section-title">
+                <h2>GET IN TOUCH</h2>
+                <p class="lead">Find us, call us, or drop us a message</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt fa-4x"></i>
+                        <h4>Visit Us</h4>
+                        <p>
+                            175 F1 High Street<br>
+                            Musselburgh, EH21 7DE<br>
+                            Scotland, United Kingdom
+                        </p>
+                        <a href="https://maps.google.com/?q=175+F1+High+Street,+Musselburgh,+EH21+7DE,+Scotland" target="_blank">
+                            <i class="fas fa-external-link-alt me-2"></i>View on Map
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-phone fa-4x"></i>
+                        <h4>Call Us</h4>
+                        <p>
+                            <strong>Main Office:</strong><br>
+                            <a href="tel:+447474361251">(+44) 7474 361251</a><br><br>
+                            <strong>Prayer Line:</strong><br>
+                            <a href="tel:03330154193">03330 154193</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-envelope fa-4x"></i>
+                        <h4>Email Us</h4>
+                        <p>
+                            <strong>General Inquiries:</strong><br>
+                            <a href="mailto:info@cccgoldparish.org">info@cccgoldparish.org</a><br><br>
+                            <strong>Prayer Requests:</strong><br>
+                            <a href="mailto:prayer@cccgoldparish.org">prayer@cccgoldparish.org</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Times -->
+    <section class="service-times">
+        <div class="container">
+            <div class="section-title">
+                <h2>SERVICE TIMES</h2>
+                <p class="lead">Join us for worship and fellowship throughout the week</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/events/programs/Sun.jpeg" alt="Sunday Service">
+                        </div>
+                        <h4>Sunday Morning</h4>
+                        <p><strong>10:00 AM</strong></p>
+                        <p>Glorious Sunday service where true worship is observed</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/events/programs/Mon.jpeg" alt="Monday Bible Study">
+                        </div>
+                        <h4>Monday Evening</h4>
+                        <p><strong>7:00 PM - 8:00 PM</strong></p>
+                        <p>Bible study (online)</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <h4>Wednesday Night</h4>
+                        <p><strong>12:00 AM - 1:00 AM</strong></p>
+                        <p>Night vigil conference call prayer</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/events/programs/Wed.jpeg" alt="Wednesday Evening Service">
+                        </div>
+                        <h4>Wednesday Evening</h4>
+                        <p><strong>6:00 PM - 7:00 PM</strong></p>
+                        <p>Mercy day service</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <img src="images/events/programs/Fri.jpeg" alt="Friday Evening Service">
+                        </div>
+                        <h4>Friday Evening</h4>
+                        <p><strong>6:00 PM - 7:00 PM</strong></p>
+                        <p>Power day service</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Special Events</h4>
+                        <p><strong>Various Times</strong></p>
+                        <p>Check our events page for upcoming special services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>SEND US A MESSAGE</h2>
+                <p class="lead">Have a question or want to connect? We'd love to hear from you</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-card">
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <select class="form-control" id="subject">
+                                    <option value="">Select a subject...</option>
+                                    <option value="prayer">Prayer Request</option>
+                                    <option value="visit">First Time Visit</option>
+                                    <option value="ministry">Ministry Inquiry</option>
+                                    <option value="event">Event Information</option>
+                                    <option value="general">General Question</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea class="form-control" id="message" rows="6" placeholder="Share your thoughts, questions, or prayer requests..." required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-custom btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>SEND MESSAGE
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>FIND US</h2>
+                <p class="lead">Located in the heart of Musselburgh, Scotland</p>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="map-container">
+                        <div>
+                            <i class="fas fa-map-marked-alt fa-4x mb-4" style="color: var(--primary-color);"></i>
+                            <h4>Interactive Map Coming Soon</h4>
+                            <p class="mb-4">We're working on adding an interactive map to help you find us easily.</p>
+                            <a href="https://maps.google.com/?q=175+F1+High+Street,+Musselburgh,+EH21+7DE,+Scotland" target="_blank" class="btn btn-custom">
+                                <i class="fas fa-external-link-alt me-2"></i>VIEW ON GOOGLE MAPS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>
+                        <a href="index.html" style="text-decoration: none; color: inherit;">
+                            <img src="images/logo.jpg" alt="CCC Logo" class="navbar-logo">
+                            CCC Glory of Latter Days Parish
+                        </a>
+                    </h5>
+                    <p>A place where faith, family, and community come together to worship, grow, and serve.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6>QUICK LINKS</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="index.html#about" class="text-white">About</a></li>
+                        <li><a href="index.html#services" class="text-white">Sundays</a></li>
+                        <li><a href="index.html#events" class="text-white">Events</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>MINISTRIES</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Children's Ministry</a></li>
+                        <li><a href="#" class="text-white">Youth Ministry</a></li>
+                        <li><a href="#" class="text-white">Women's Ministry</a></li>
+                        <li><a href="#" class="text-white">Men's Ministry</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6>RESOURCES</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="goldparishsermon.html" class="text-white">Sermon Library</a></li>
+                        <li><a href="#" class="text-white">Bible Study</a></li>
+                        <li><a href="#" class="text-white">Prayer Requests</a></li>
+                        <li><a href="#" class="text-white">Online Giving</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-lg-8">
+                    <p>&copy; 2025 CCC Glory of Latter Days Parish. All rights reserved.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <p>Built with ❤️ for God's glory</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Contact form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (firstName && lastName && email && message) {
+                alert(`Thank you ${firstName} ${lastName}! Your message has been received. We'll get back to you soon at ${email}. In a fully functional website, this would be sent to the church's email system.`);
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Please fill in all required fields marked with *');
+            }
+        }
+
+        // Phone number click to call
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!navigator.userAgent.match(/(iPhone|iPod|Android|BlackBerry)/)) {
+                    e.preventDefault();
+                    alert('Phone number: ' + this.textContent + '\n\nOn mobile devices, this would open your phone app to make a call.');
+                }
+            });
+        });
+
+        // Email click
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const email = this.getAttribute('href').replace('mailto:', '');
+                alert(`Opening email to: ${email}\n\nIn a fully functional website, this would open your default email client.`);
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form validation on input
+        document.querySelectorAll('input[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#ddd';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 
